@@ -2,26 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
-}
-
-@media (prefers-color-scheme: dark) {
-  /* :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  } */
-}
-
 @layer components {
   .blog-width {
     @apply mx-auto max-w-screen-md;
   }
   .blog-layout {
     @apply mx-auto max-w-screen-md lg:flex lg:h-screen lg:items-center flex-col;
+  }
+  .blog-padding {
+    @apply px-4 lg:px-0;
   }
 }
 

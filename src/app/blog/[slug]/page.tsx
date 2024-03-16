@@ -14,6 +14,7 @@ import remarkGfm from "remark-gfm";
 
 import CodeHighlight from "@/components/CodeHighlight";
 import { formatDate } from "@/lib/utils";
+import Typography from "@/components/Typography";
 
 type Props = {
   params: {
@@ -56,32 +57,35 @@ export default async function PostPage(props: Props) {
   const mdString = n2m.toMarkdownString(mdblocks);
 
   const components = {
-    a: (props) => {
-      const { node, ...rest } = props;
-      return (
-        <span className="relative group">
-          <a className="group-hover:text-white" {...rest}>
-            {props.children}
-          </a>
-          <span className="absolute left-0 -bottom-1 w-full h-1 bg-orange-500 -z-10 group-hover:h-full group-hover:transition-all"></span>
-        </span>
-      );
-    },
     pre: (props) => {
       const { node, ...rest } = props;
       return <CodeHighlight content={props.children} />;
     },
   };
 
+  const shadcnProseStyle = `prose-h1:scroll-m-20 prose-h1:text-4xl prose-h1:font-extrabold prose-h1:tracking-tight prose-h1:lg:text-5xl
+  prose-h2:scroll-m-20 prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:first:mt-0
+  prose-h3:scroll-m-20 prose-h3:text-2xl prose-h3:font-semibold prose-h3:tracking-tight
+  prose-h4:scroll-m-20 prose-h4:text-xl prose-h4:font-semibold prose-h4:tracking-tight
+  prose-p:leading-7 prose-p:[&:not(:first-child)]:mt-6`;
   return (
-    <article className="blog-width prose prose-a:no-underline py-4 ">
-      <span className="text-slate-500">
-        {formatDate(new Date(post.properties["Published Date"].date.start))}
-      </span>
-      <h1>{post.properties.Title.title[0].plain_text}</h1>
-      <Markdown remarkPlugins={[remarkGfm]} components={{ ...components }}>
-        {mdString.parent}
-      </Markdown>
-    </article>
+    <div className="blog-width blog-padding">
+      <div className="flex flex-col gap-y-16">
+        <div></div>
+        <article className={"prose prose-slate " + shadcnProseStyle}>
+          <Typography
+            variant="p"
+            affects="small"
+            className="not-prose text-slate-500 mt-0 my-0"
+          >
+            {formatDate(new Date(post.properties["Published Date"].date.start))}
+          </Typography>
+          <h1>{post.properties.Title.title[0].plain_text}</h1>
+          <Markdown remarkPlugins={[remarkGfm]} components={{ ...components }}>
+            {mdString.parent}
+          </Markdown>
+        </article>
+      </div>
+    </div>
   );
 }

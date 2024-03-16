@@ -1,6 +1,6 @@
 // app/template.tsx
 "use client";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const variants = {
   hidden: { opacity: 0, x: -200, y: 0 },
@@ -10,6 +10,11 @@ const variants = {
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
+      //   variants={variants}
+      //   initial="hidden"
+      //   animate="enter"
+      //   transition={{ type: "linear" }}
+      //   exit="hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.75 }}
