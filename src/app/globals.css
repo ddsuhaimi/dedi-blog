@@ -12,6 +12,9 @@
   .blog-padding {
     @apply px-4 lg:px-0;
   }
+  .link {
+    @apply underline font-medium underline-offset-4 hover:underline-offset-2
+  }
 }
 
 body {

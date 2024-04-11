@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { formatDate } from "@/lib/utils";
 import Typography from "@/components/Typography";
+import { Metadata } from "next";
 
 type Props = {};
 
@@ -15,7 +16,10 @@ async function getPosts() {
 }
 
 export const revalidate = 10;
-
+export const metadata: Metadata = {
+  title: "Blog - Dedi",
+  description: "Technical articles written by Dedi",
+};
 function Article({ published_date, title, summary, slug }) {
   return (
     <div className="flex flex-col gap-y-1">
@@ -46,7 +50,7 @@ export default async function BlogPage() {
     <div className="blog-width blog-padding">
       <div className="flex flex-col gap-y-16">
         <div></div>
-        <div className="flex flex-col gap-y-6">
+        <div className="flex flex-col gap-y-8">
           <Typography variant="h1">Blog</Typography>
           {posts.map((post: any) => {
             return (
@@ -63,7 +67,7 @@ export default async function BlogPage() {
                 <Typography
                   variant="h2"
                   affects="removePMargin"
-                  className="text-slate-900 font-medium text-base border-0 pb-0"
+                  className="text-slate-900 font-medium text-lg border-0 pb-0 link"
                 >
                   <Link
                     href={`/blog/${post.properties.Slug.rich_text[0].plain_text}`}

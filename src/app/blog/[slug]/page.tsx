@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import {
   fetchPageBlocks,
@@ -22,6 +23,23 @@ type Props = {
   };
 };
 export const revalidate = 100;
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
+    throw new Error("DB Id is not defined");
+  }
+  const posts = await getDatabase(process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID);
+  const post = posts.find(
+    (post: any) => post.properties.Slug.rich_text[0].plain_text === params.slug
+  );
+
+  return {
+    title: post.properties.Title.title[0].plain_text + " - Dedi",
+  };
+}
 
 export async function generateStaticParams() {
   if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
@@ -67,7 +85,8 @@ export default async function PostPage(props: Props) {
   prose-h2:scroll-m-20 prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:first:mt-0
   prose-h3:scroll-m-20 prose-h3:text-2xl prose-h3:font-semibold prose-h3:tracking-tight
   prose-h4:scroll-m-20 prose-h4:text-xl prose-h4:font-semibold prose-h4:tracking-tight
-  prose-p:leading-7 prose-p:[&:not(:first-child)]:mt-6`;
+  prose-p:leading-7 prose-p:[&:not(:first-child)]:mt-6
+  prose-a:link`;
   return (
     <div className="blog-width blog-padding">
       <div className="flex flex-col gap-y-16">
@@ -76,7 +95,7 @@ export default async function PostPage(props: Props) {
           <Typography
             variant="p"
             affects="small"
-            className="not-prose text-slate-500 mt-0 my-0"
+            className="not-prose text-slate-500 mt-0 my-0 leading-normal"
           >
             {formatDate(new Date(post.properties["Published Date"].date.start))}
           </Typography>
