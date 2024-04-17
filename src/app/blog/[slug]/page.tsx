@@ -28,10 +28,10 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
+  if (!process.env.ARTICLE_DATABASE_ID) {
     throw new Error("DB Id is not defined");
   }
-  const posts = await getDatabase(process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID);
+  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
   const post = posts.find(
     (post: any) => post.properties.Slug.rich_text[0].plain_text === params.slug
   );
@@ -42,21 +42,21 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
-  if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
+  if (!process.env.ARTICLE_DATABASE_ID) {
     throw new Error("DB Id is not defined");
   }
-  const posts = await getDatabase(process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID);
+  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
   return posts.map((post) => ({
     slug: post.properties.Slug.rich_text[0].plain_text,
   }));
 }
 
 async function getPost(params) {
-  if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
+  if (!process.env.ARTICLE_DATABASE_ID) {
     throw new Error("Undefined Notion Database ID");
   }
   const slug = params.slug;
-  const posts = await getDatabase(process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID);
+  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
   const matchedPost = posts.filter(
     (p) => p.properties.Slug.rich_text[0].plain_text === slug
   );

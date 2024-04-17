@@ -8,10 +8,10 @@ import { Metadata } from "next";
 type Props = {};
 
 async function getPosts() {
-  if (!process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID) {
+  if (!process.env.ARTICLE_DATABASE_ID) {
     throw new Error("No article database id");
   }
-  const posts = await getDatabase(process.env.NEXT_PUBLIC_ARTICLE_DATABASE_ID);
+  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
   return posts;
 }
 
