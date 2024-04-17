@@ -3,7 +3,7 @@ const { Client } = require("@notionhq/client");
 // Initializing a client
 export const notion = new Client({
   //   auth: process.env.NOTION_TOKEN,
-  auth: "secret_jcDIUya333MGzi51Ny5gTHiLme3oGEbCx3Jumq5idQx",
+  auth: process.env.SECRET_TOKEN || "",
 });
 
 export const getDatabase = async (databaseId: string) => {
