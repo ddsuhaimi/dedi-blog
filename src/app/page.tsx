@@ -1,7 +1,5 @@
-import { getDatabase } from "@/lib/notion";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ChevronRight,
   Globe,
@@ -37,19 +35,29 @@ function FeatureArticle({ published_date, title, summary, slug }) {
   );
 }
 
-function FeatureProject({ published_date, title, summary, slug }) {
+function FeatureProject({ published_date, title, summary, slug, github_link, demo_link }: { published_date?: Date, title: string, summary: string, slug: string, github_link?: string, demo_link?: string }) {
   return (
     <div className="flex flex-col gap-y-1">
       <Typography variant="p" affects="small" className="text-slate-500">
         {published_date && formatDate(published_date)}
       </Typography>
-      <Typography
-        variant="p"
-        affects="removePMargin"
-        className="text-slate-900 font-medium"
-      >
-        <Link href={"/blog/" + slug}>{title}</Link>
-      </Typography>
+      <div className="flex items-start flex-col md:flex-row md:justify-between md:items-center">
+        <Typography
+          variant="p"
+          affects="removePMargin"
+          className="text-slate-900 font-medium"
+        >
+          <Link href={"/blog/" + slug}>{title}</Link>
+        </Typography>
+        <div className="flex justify-end text-sm gap-2">
+          {demo_link && <Button size={"icon"} variant={"outline"}>
+            <SquareArrowOutUpRight className="h-4 w-4" />
+          </Button>}
+          {github_link && <Button size={"icon"} variant={"outline"}>
+            <Github className="h-4 w-4" />
+          </Button>}
+        </div>
+      </div>
       <Typography
         variant="p"
         affects="removePMargin"
@@ -57,14 +65,6 @@ function FeatureProject({ published_date, title, summary, slug }) {
       >
         {summary}
       </Typography>
-      <div className="flex justify-end text-sm gap-2">
-        <Button size={"icon"} variant={"ghost"}>
-          <SquareArrowOutUpRight className="h-4 w-4" />
-        </Button>
-        <Button size={"icon"} variant={"ghost"}>
-          <Github className="h-4 w-4" />
-        </Button>
-      </div>
     </div>
   );
 }
@@ -80,7 +80,7 @@ export default async function Home() {
       <div className="flex flex-col gap-y-16">
         <div></div>
         <div>
-          <img src="https://placehold.co/160x160?text=" className="pb-4" />
+          <img src="https://placehold.co/160x160?text=" alt="Picture of Dedi Suhaimi" width={160} height={160} className="pb-4" />
           <Typography variant="h1" className="text-xl font-semibold">
             Hey, I&apos;m Dedi. I build stuff on web.
           </Typography>
@@ -106,74 +106,73 @@ export default async function Home() {
             .
           </Typography>
         </div>
-        <div className="flex flex-col space-y-6">
-          <Typography variant="h4">Featured articles</Typography>
-          <FeatureArticle
-            published_date={new Date()}
-            title={
-              "How I Managed to Stay Stress-free despite Having 5 Fulltime Jobs"
-            }
-            summary={
-              "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-            }
-            slug={"2023-review-what-i-could-do-better"}
-          />
-          <FeatureArticle
-            published_date={new Date()}
-            title={
-              "Unlocking the Potential of MongoDB: Best Practices for Scalable Database Solutions"
-            }
-            summary={
-              "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-            }
-            slug={"2023-review-what-i-could-do-better"}
-          />
-          <FeatureArticle
-            published_date={new Date()}
-            title={
-              "Next.js Deep Dive: Building High-Performance React Applications"
-            }
-            summary={
-              "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-            }
-            slug={"2023-review-what-i-could-do-better"}
-          />
-          <Link href={"/blog"} className="link">
-            View all articles
-          </Link>
-        </div>
-        <div>
-          <div className="flex flex-col gap-y-6">
-            <Typography variant="h4">Featured projects</Typography>
-            <FeatureProject
-              published_date={new Date()}
-              title={"Chrommandr"}
-              summary={
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-              }
-              slug={"2023-review-what-i-could-do-better"}
-            />
-            <FeatureProject
-              published_date={new Date()}
-              title={"JagoASN"}
-              summary={
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-              }
-              slug={"2023-review-what-i-could-do-better"}
-            />
-            <FeatureProject
-              published_date={new Date()}
-              title={"Go Screenshot API"}
-              summary={
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet"
-              }
-              slug={"2023-review-what-i-could-do-better"}
-            />
-            <Link href={"/blog"} className="link">
-              View all projects
-            </Link>
-          </div>
-        </div>
+        {/* <section className="flex flex-col space-y-6"> */}
+        {/*   <Typography variant="h4">Featured articles</Typography> */}
+        {/*   <FeatureArticle */}
+        {/*     published_date={new Date()} */}
+        {/*     title={ */}
+        {/*       "How I Managed to Stay Stress-free despite Having 5 Fulltime Jobs" */}
+        {/*     } */}
+        {/*     summary={ */}
+        {/*       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet" */}
+        {/*     } */}
+        {/*     slug={"2023-review-what-i-could-do-better"} */}
+        {/*   /> */}
+        {/*   <FeatureArticle */}
+        {/*     published_date={new Date()} */}
+        {/*     title={ */}
+        {/*       "Unlocking the Potential of MongoDB: Best Practices for Scalable Database Solutions" */}
+        {/*     } */}
+        {/*     summary={ */}
+        {/*       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet" */}
+        {/*     } */}
+        {/*     slug={"2023-review-what-i-could-do-better"} */}
+        {/*   /> */}
+        {/*   <FeatureArticle */}
+        {/*     published_date={new Date()} */}
+        {/*     title={ */}
+        {/*       "Next.js Deep Dive: Building High-Performance React Applications" */}
+        {/*     } */}
+        {/*     summary={ */}
+        {/*       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet" */}
+        {/*     } */}
+        {/*     slug={"2023-review-what-i-could-do-better"} */}
+        {/*   /> */}
+        {/*   <Link href={"/blog"} className="link"> */}
+        {/*     View all articles */}
+        {/*   </Link> */}
+        {/* </section> */}
+        {/* <section> */}
+        {/*   <div className="flex flex-col gap-y-6"> */}
+        {/*     <Typography variant="h4">Featured projects</Typography> */}
+        {/*     <FeatureProject */}
+        {/*       title={"Chrommandr - Command Palette for Browser"} */}
+        {/*       summary={ */}
+        {/*         "A browser extension for showing command palette. It includes two commands: navigating to user's tabs and executing quick actions to browser (i.e. open settings page)" */}
+        {/*       } */}
+        {/*       slug={"2023-review-what-i-could-do-better"} */}
+        {/*       github_link="https://github.com/ddsuhaimi/chrommandr" */}
+        {/*     /> */}
+        {/*     <FeatureProject */}
+        {/*       title={"JagoASN - Online Exam Practice Platform"} */}
+        {/*       summary={ */}
+        {/*         "An online test and practice platform focusing on Indonesian's civil servant exams. It includes customizable tests, analytics, rankings and many more (with payment included too!). Technologies: Typescript, Next JS, Node JS, Postgres, " */}
+        {/*       } */}
+        {/*       slug={"2023-review-what-i-could-do-better"} */}
+        {/*       demo_link="https://jagoasn.com" */}
+        {/*     /> */}
+        {/*     <FeatureProject */}
+        {/*       title={"Go Screenshot API"} */}
+        {/*       summary={ */}
+        {/*         "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet" */}
+        {/*       } */}
+        {/*       slug={"2023-review-what-i-could-do-better"} */}
+        {/*     /> */}
+        {/*     <Link href={"/blog"} className="link"> */}
+        {/*       View all projects */}
+        {/*     </Link> */}
+        {/*   </div> */}
+        {/* </section> */}
         <div>
           <Typography variant="h4">Contact (or hire) me</Typography>
           <Typography variant={"p"}>
