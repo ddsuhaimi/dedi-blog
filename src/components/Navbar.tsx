@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { cn } from "@/lib/utils";
@@ -15,7 +14,6 @@ const navs = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(false);
   return (
     <header className="w-full bg-white">
       <nav className="blog-width blog-padding py-4">
@@ -23,14 +21,13 @@ export default function Navbar() {
           {navs.map((item) => {
             const isActive = pathname === item.path;
             return (
-              <div key={item.path} className="mx-4">
-                <Link
-                  href={item.path}
-                  className={cn(isActive && "font-semibold")}
-                >
-                  {item.label}
-                </Link>
-              </div>
+              <Link
+                key={item.path}
+                href={item.path}
+                className={cn(isActive && "font-semibold")}
+              >
+                {item.label}
+              </Link>
             );
           })}
         </div>
