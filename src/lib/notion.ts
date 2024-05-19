@@ -9,6 +9,12 @@ export const notion = new Client({
 export const getDatabase = async (databaseId: string) => {
   const response = await notion.databases.query({
     database_id: databaseId,
+    sorts: [
+      {
+        property: "Published Date",
+        direction: "descending",
+      },
+    ],
   });
   return response.results;
 };

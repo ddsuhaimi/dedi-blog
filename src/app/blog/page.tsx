@@ -12,7 +12,10 @@ async function getPosts() {
     throw new Error("No article database id");
   }
   const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
-  return posts;
+  const publishedPosts = posts.filter(
+    (post: any) => post.properties.Published.checkbox
+  );
+  return publishedPosts;
 }
 
 export const revalidate = 10;
