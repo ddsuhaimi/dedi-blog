@@ -15,13 +15,16 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ContactForm from "@/components/ContactForm";
+import { Label } from "@/components/ui/label";
 
-function FeatureArticle({ title, summary, slug, thumbnail = "" }) {
+function FeatureArticle({ title, summary, slug }) {
   return (
     <Card className="group overflow-hidden rounded-lg shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-md flex flex-col justify-between">
       <CardContent className="space-y-4 pt-6">
         <img
-          src={thumbnail}
+          src={`https://picsum.photos/id/${Math.floor(
+            Math.random() * 10
+          )}/225/400`}
           width={400}
           height={225}
           alt="Article Image"
@@ -50,7 +53,6 @@ function FeatureProject({
   published_date,
   title,
   summary,
-  thumbnail,
   slug,
   github_link,
   demo_link,
@@ -58,7 +60,6 @@ function FeatureProject({
   published_date?: Date;
   title: string;
   summary: string;
-  thumbnail: string;
   slug: string;
   github_link?: string;
   demo_link?: string;
@@ -67,7 +68,9 @@ function FeatureProject({
     <Card className="group overflow-hidden rounded-lg shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-md flex flex-col justify-between">
       <CardContent className="space-y-4 pt-6">
         <img
-          src={thumbnail}
+          src={`https://picsum.photos/id/${Math.floor(
+            Math.random() * 10
+          )}/225/400`}
           width={400}
           height={225}
           alt="Project Image"
@@ -80,7 +83,7 @@ function FeatureProject({
       </CardContent>
       <CardFooter className="flex items-center justify-end">
         <Link
-          href={slug}
+          href="#"
           className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary/50"
           prefetch={false}
         >
@@ -138,165 +141,65 @@ function DownloadIcon(props) {
   );
 }
 
-export default async function Home() {
+export default async function ContactPage() {
   return (
-    <>
-      <section id="about" className="container mx-auto max-w-5xl px-4 py-20">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold">
-              Hey, I&apos;m Dedi. I build stuff on web.
-            </h1>
-            <p className="text-muted-foreground">
-              I'm a full-stack web developer based in Aceh, Indonesia.
-            </p>
-            <p className="text-muted-foreground">
-              I'm a passionate developer with a strong background in building
-              modern web applications. I love exploring new technologies and
-              constantly learning to improve my craft.
-            </p>
-            <p className="text-muted-foreground">
-              Feel free to check out my blog or social media
-            </p>
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary/50"
-              prefetch={false}
-            >
-              <ArrowRightIcon className="h-4 w-4" />
-              Read my blog
-            </Link>
-          </div>
-          <div className="relative overflow-hidden rounded-lg">
-            <img
-              src="avatartion.png"
-              width={300}
-              height={150}
-              alt="Profile"
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-105  transform -scale-x-100 hidden md:block"
-            />
-          </div>
+    <section id="contact" className="container mx-auto max-w-5xl px-4 py-20">
+      <div className="space-y-8">
+        <div className="space-y-4 pt-6">
+          <h2 className="text-3xl font-bold">Contact Me</h2>
+          <p className="text-muted-foreground">
+            Get in touch with me for any inquiries or collaborations.
+          </p>
         </div>
-      </section>
-      {/* <section id="articles" className="container mx-auto max-w-5xl px-4 py-20">
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Featured Articles</h2>
-            <p className="text-muted-foreground">
-              Check out some of my latest blog posts.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureArticle
-              title="Mastering React Hooks: A Comprehensive Guide"
-              summary={
-                "Dive deep into the world of React Hooks and learn how to leverage them to build powerful and efficient applications."
-              }
-              slug="#"
-            />
-            <FeatureArticle
-              title="Optimizing Web Performance: Strategies and Best Practices"
-              summary={
-                "Learn how to optimize your web applications for lightning-fast performance and provide an exceptional user experience."
-              }
-              slug="#"
-            />
-            <FeatureArticle
-              title="Exploring the Power of TypeScript: A Beginner's Guide"
-              summary={
-                "Discover the benefits of TypeScript and learn how to integrate it into your web development workflow."
-              }
-              slug="#"
-            />
-          </div>
-          <div>
-            <Link href={"/blog"} className="link">
-              View all articles
-            </Link>
-          </div>
-        </div>
-      </section> */}
-      <section id="projects" className="container mx-auto max-w-5xl px-4 py-20">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Featured Projects</h2>
-            <p className="text-muted-foreground">
-              Check out some of my recent projects.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureProject
-              title="JagoASN"
-              summary={
-                "A online test web portal with subscription and payment enabled"
-              }
-              slug={"/project/jagoasn"}
-              thumbnail="https://prod-files-secure.s3.us-west-2.amazonaws.com/acda97d1-4e8f-4902-9071-3ed496e7351d/80b9fe09-239d-4b47-a706-377f3a77c19f/JagoASN-Solusi-lulus-seleksi-CPNS-Kedinasan.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240708%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240708T015606Z&X-Amz-Expires=3600&X-Amz-Signature=0a75a5394e37f6182c8a87c821ef20b18c4c5bf7b2d6fc4d4fa7ba45dfcece71&X-Amz-SignedHeaders=host&x-id=GetObject"
-            />
-            <FeatureProject
-              title="Chrommandr"
-              summary={"A browser extension showing command palette"}
-              slug={"/project/chrommandr"}
-              thumbnail="https://prod-files-secure.s3.us-west-2.amazonaws.com/acda97d1-4e8f-4902-9071-3ed496e7351d/51895857-4a97-41ca-9cbe-ec6356295942/185647428-441b160f-c894-46da-bb58-73e713a569d2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240708%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240708T015637Z&X-Amz-Expires=3600&X-Amz-Signature=a483f7b15eb2e3f97c35a4a12bea11d08c3d53131071660e4394e88f9e9b5a75&X-Amz-SignedHeaders=host&x-id=GetObject"
-            />
-          </div>
-          <div>
-            <Link href={"/project"} className="link">
-              View all projects
-            </Link>
-          </div>
-        </div>
-      </section>
-      {/* <section id="work" className="container mx-auto max-w-5xl px-4 py-20">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Work Experience</h2>
-            <p className="text-muted-foreground">
-              Check out my professional experience.
-            </p>
-          </div>
-          <div className="relative pl-6 after:absolute after:inset-y-0 after:w-px after:bg-muted-foreground/20 after:left-0 grid gap-10">
-            <div className="grid gap-1 text-sm relative">
-              <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-              <div className="font-medium">Full Stack Developer</div>
-              <div className="text-muted-foreground">
-                MHC Asia Group | 2021 - Present
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <MailIcon className="h-5 w-5 text-primary" />
+                <a href="#" className="text-muted-foreground hover:underline">
+                  example@acme.inc
+                </a>
               </div>
-              <ul className="list-disc space-y-2 pl-4 text-muted-foreground">
-                <li>
-                  Developed and maintained responsive web applications using
-                  React, Redux, and Tailwind CSS.
-                </li>
-                <li>
-                  Collaborated with cross-functional teams to implement new
-                  features and optimize existing solutions.
-                </li>
-              </ul>
+              <div className="flex items-center gap-2">
+                <PhoneIcon className="h-5 w-5 text-primary" />
+                <a href="#" className="text-muted-foreground hover:underline">
+                  +1 (234) 567-890
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPinIcon className="h-5 w-5 text-primary" />
+                <p className="text-muted-foreground">
+                  123 Main St, Anytown USA
+                </p>
+              </div>
             </div>
-            <div className="grid gap-1 text-sm relative">
-              <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-              <div className="font-medium">Software Engineer</div>
-              <div className="text-muted-foreground">
-                Formulatrix | 2020 - 2021
-              </div>
-              <ul className="list-disc space-y-2 pl-4 text-muted-foreground">
-                <li>
-                  Developed and maintained responsive web applications using
-                  React, Redux, and Tailwind CSS.
-                </li>
-                <li>
-                  Collaborated with cross-functional teams to implement new
-                  features and optimize existing solutions.
-                </li>
-              </ul>
+            <div className="flex gap-4">
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                prefetch={false}
+              >
+                <GithubIcon className="h-6 w-6" />
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                prefetch={false}
+              >
+                <TwitterIcon className="h-6 w-6" />
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                prefetch={false}
+              >
+                <LinkedinIcon className="h-6 w-6" />
+              </Link>
             </div>
           </div>
         </div>
-      </section> */}
-      <section id="contact" className="container mx-auto max-w-5xl px-4 py-20">
-        <ContactForm />
-      </section>
-    </>
+      </div>
+    </section>
   );
   // return (
   //   <section className="blog-width blog-padding">
@@ -427,4 +330,142 @@ export default async function Home() {
   //     </div>
   //   </section>
   // );
+}
+
+function GithubIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function LaptopIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" />
+    </svg>
+  );
+}
+
+function LinkedinIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function MailIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  );
+}
+
+function MapPinIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function PhoneIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
+function TwitterIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+    </svg>
+  );
 }

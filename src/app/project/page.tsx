@@ -8,15 +8,15 @@ import { Card } from "@/components/ui/card";
 
 type Props = {};
 
-async function getPosts() {
-  if (!process.env.ARTICLE_DATABASE_ID) {
+async function getProjects() {
+  if (!process.env.PROJECT_DATABASE_ID) {
     throw new Error("No article database id");
   }
-  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
-  const publishedPosts = posts.filter(
-    (post: any) => post.properties.Published.checkbox
+  const posts = await getDatabase(process.env.PROJECT_DATABASE_ID);
+  const publishedProjects = posts.filter(
+    (project: any) => true // project.properties.Published.checkbox
   );
-  return publishedPosts;
+  return publishedProjects;
 }
 
 export const revalidate = 10;
@@ -48,105 +48,111 @@ function Article({ published_date, title, summary, slug }) {
   );
 }
 
-const posts2 = [
+const projects = [
   {
-    title: "Mastering React Hooks: A Comprehensive Guide",
+    title: "E-commerce Platform",
     description:
-      "Dive deep into the world of React Hooks and learn how to leverage them to build powerful and efficient applications.",
-    date: "May 15, 2023",
-    href: "/blogmastering-react-hooks",
+      "Full-stack e-commerce platform with user authentication, product listings, cart functionality, and checkout process.",
+    imageUrl: "/ecommerce.png",
+    link: "#",
   },
   {
-    title: "Optimizing Web Performance: Strategies and Best Practices",
+    title: "Task Management App",
     description:
-      "Learn how to optimize your web applications for lightning-fast performance and provide an exceptional user experience.",
-    date: "April 28, 2023",
-    href: "/blogoptimizing-web-performance",
+      "Task management web application with CRUD operations for tasks, user authentication, and real-time updates.",
+    imageUrl: "/task-management.png",
+    link: "#",
   },
   {
-    title: "Exploring the Power of TypeScript: A Beginner's Guide",
+    title: "Social Media Dashboard",
     description:
-      "Discover the benefits of TypeScript and learn how to integrate it into your web development workflow.",
-    date: "March 10, 2023",
-    href: "/blogexploring-typescript",
+      "Dashboard for analyzing social media metrics, scheduling posts, and managing user interactions.",
+    imageUrl: "/social-dashboard.png",
+    link: "#",
   },
   {
-    title: "Building a Serverless API with AWS Lambda",
+    title: "Portfolio Website",
     description:
-      "Learn how to create a serverless API using AWS Lambda and API Gateway.",
-    date: "February 20, 2023",
-    href: "/blogserverless-api-with-aws-lambda",
+      "Personal portfolio website showcasing projects, skills, and contact information.",
+    imageUrl: "/portfolio.png",
+    link: "#",
   },
   {
-    title: "Deploying a React App to Vercel",
+    title: "Recipe App",
     description:
-      "A step-by-step guide on how to deploy a React application to Vercel.",
-    date: "January 5, 2023",
-    href: "/blogdeploying-react-to-vercel",
+      "Recipe sharing platform with search functionality, user profiles, and favorites.",
+    imageUrl: "/recipe-app.png",
+    link: "#",
   },
   {
-    title: "Integrating Stripe Payments into a React App",
+    title: "Blog Platform",
     description:
-      "A comprehensive guide on how to integrate Stripe payments into a React application.",
-    date: "December 15, 2022",
-    href: "/blogstripe-payments-in-react",
+      "Full-featured blog platform with rich text editor, comments section, and user roles.",
+    imageUrl: "/blog-platform.png",
+    link: "#",
   },
 ];
 
-export default async function BlogPage() {
-  const posts = await getPosts();
+export default async function ProjectPage() {
+  const projects2 = await getProjects();
+  // console.log("🚀 ~ ProjectPage ~ posts:", projects2);
+  // const title = projects2[0].properties.Name.title[0].plain_text;
+  // const slug = projects2[0].properties.Slug.rich_text[0].plain_text;
+  // const thumbnail = projects2[0].properties.Thumbnail.files[0].url;
+  // const screenshots = projects2[0].properties.Screenshot.files[0].url;
+  // console.log(projects2[0].properties.Name.title[0].plain_text);
+  // console.log(projects2[0].properties.Slug.rich_text[0].plain_text);
   return (
-    <section id="articles" className="container mx-auto max-w-5xl px-4 py-20">
+    <section id="projects" className="container mx-auto max-w-5xl px-4 py-20">
       <div className="space-y-8">
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold pt-6">Articles</h2>
+        <div className="space-y-4 pt-6">
+          <h2 className="text-3xl font-bold">Projects</h2>
           <p className="text-muted-foreground">
-            Check out my latest blog posts.
+            Check out some of my recent projects.
           </p>
         </div>
-        <div className="space-y-6">
-          <div className="flex flex-col gap-6">
-            {posts.map((post) => (
-              <Card className="overflow-hidden rounded-lg shadow-sm relative">
-                <div className="flex flex-col md:flex-row items-start md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects2.map((project) => {
+            const title = project.properties.Name.title[0]?.plain_text;
+            const slug =
+              project.properties.Slug.rich_text[0]?.plain_text || "#";
+            const thumbnail = project.properties.Thumbnail.files[0]?.file.url;
+            const description =
+              project.properties.Description.rich_text[0]?.plain_text;
+            return (
+              <Card
+                key={title}
+                className="overflow-hidden rounded-lg shadow-sm transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                <div className="flex flex-col h-full cursor-pointer">
                   <img
-                    src={`https://picsum.photos/id/${Math.floor(
-                      Math.random() * 10
-                    )}/225/400`}
+                    src={thumbnail}
                     width={400}
                     height={225}
-                    alt="Article Image"
-                    className="h-40 w-full md:w-40 flex-shrink-0 object-cover object-center"
+                    alt="Project Image"
+                    className="h-40 w-full object-cover object-center"
                   />
-                  <div className="flex-1 space-y-2 p-2 md:p-0">
-                    <div></div>
-                    <div className="text-sm text-muted-foreground">
-                      {formatDate(
-                        new Date(post.properties["Published Date"].date.start)
-                      )}
+                  <div className="flex flex-col justify-between flex-grow">
+                    <div className="p-4 space-y-2">
+                      <h3 className="text-lg font-bold">{title}</h3>
+                      <p className="text-muted-foreground mb-auto">
+                        {description}
+                      </p>
                     </div>
-                    <h3 className="text-lg font-bold">
-                      {post.properties.Title.title[0].plain_text}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {" "}
-                      {post.properties.Summary.rich_text[0].plain_text}
-                    </p>
-                    <div className="flex items-center justify-end md:absolute md:bottom-2 md:right-2">
+                    <div className="p-4 flex justify-end">
                       <Link
-                        href={`/blog/${post.properties.Slug.rich_text[0].plain_text}`}
-                        className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        href={`/project/${slug}`}
+                        className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                         prefetch={false}
                       >
-                        <ArrowRightIcon className="h-4 w-4" />
-                        Read More
+                        Read more
                       </Link>
                     </div>
                   </div>
                 </div>
               </Card>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
