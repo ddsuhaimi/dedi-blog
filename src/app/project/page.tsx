@@ -1,5 +1,6 @@
 import { getDatabase } from "@/lib/notion";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { formatDate } from "@/lib/utils";
 import Typography from "@/components/Typography";
@@ -19,7 +20,7 @@ async function getProjects() {
   return publishedProjects;
 }
 
-export const revalidate = 10;
+export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Blog - Dedi",
   description: "Projects developed by Dedi",
@@ -84,10 +85,10 @@ export default async function ProjectPage() {
                 className="overflow-hidden rounded-lg shadow-sm transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 <div className="flex flex-col h-full cursor-pointer">
-                  <img
+                  <Image
                     src={thumbnail}
-                    // width={400}
-                    // height={225}
+                    width={400}
+                    height={225}
                     alt="Project Image"
                     className="h-40 w-full object-center object-cover"
                   />

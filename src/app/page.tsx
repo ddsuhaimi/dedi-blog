@@ -21,7 +21,7 @@ function FeatureArticle({ title, summary, slug, thumbnail = "" }) {
   return (
     <Card className="group overflow-hidden rounded-lg shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-md flex flex-col justify-between">
       <CardContent className="space-y-4 pt-6">
-        <img
+        <Image
           src={thumbnail}
           width={400}
           height={225}
@@ -67,7 +67,7 @@ function FeatureProject({
   return (
     <Card className="group overflow-hidden rounded-lg shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-md flex flex-col justify-between">
       <CardContent className="space-y-4 pt-6">
-        <img
+        <Image
           src={thumbnail}
           width={400}
           height={225}
@@ -181,7 +181,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="relative overflow-hidden rounded-lg">
-            <img
+            <Image
               src="avatartion.png"
               width={300}
               height={150}
