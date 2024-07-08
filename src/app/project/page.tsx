@@ -22,7 +22,7 @@ async function getProjects() {
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
-  title: "Blog - Dedi",
+  title: "Project - Dedi",
   description: "Projects developed by Dedi",
 };
 function Article({ published_date, title, summary, slug }) {
