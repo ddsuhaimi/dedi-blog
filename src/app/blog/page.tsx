@@ -48,51 +48,6 @@ function Article({ published_date, title, summary, slug }) {
   );
 }
 
-const posts2 = [
-  {
-    title: "Mastering React Hooks: A Comprehensive Guide",
-    description:
-      "Dive deep into the world of React Hooks and learn how to leverage them to build powerful and efficient applications.",
-    date: "May 15, 2023",
-    href: "/blogmastering-react-hooks",
-  },
-  {
-    title: "Optimizing Web Performance: Strategies and Best Practices",
-    description:
-      "Learn how to optimize your web applications for lightning-fast performance and provide an exceptional user experience.",
-    date: "April 28, 2023",
-    href: "/blogoptimizing-web-performance",
-  },
-  {
-    title: "Exploring the Power of TypeScript: A Beginner&apos;s Guide",
-    description:
-      "Discover the benefits of TypeScript and learn how to integrate it into your web development workflow.",
-    date: "March 10, 2023",
-    href: "/blogexploring-typescript",
-  },
-  {
-    title: "Building a Serverless API with AWS Lambda",
-    description:
-      "Learn how to create a serverless API using AWS Lambda and API Gateway.",
-    date: "February 20, 2023",
-    href: "/blogserverless-api-with-aws-lambda",
-  },
-  {
-    title: "Deploying a React App to Vercel",
-    description:
-      "A step-by-step guide on how to deploy a React application to Vercel.",
-    date: "January 5, 2023",
-    href: "/blogdeploying-react-to-vercel",
-  },
-  {
-    title: "Integrating Stripe Payments into a React App",
-    description:
-      "A comprehensive guide on how to integrate Stripe payments into a React application.",
-    date: "December 15, 2022",
-    href: "/blogstripe-payments-in-react",
-  },
-];
-
 export default async function BlogPage() {
   const posts = await getPosts();
   return (
