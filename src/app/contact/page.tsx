@@ -37,40 +37,31 @@ export default async function ContactPage() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <MailIcon className="h-5 w-5 text-primary" />
-                <a href="#" className="text-muted-foreground hover:underline">
-                  example@acme.inc
+                <a
+                  href="mailto:dedisuhaimiacc@gmail.com"
+                  className="text-muted-foreground hover:underline"
+                >
+                  dedisuhaimiacc@gmail.com
                 </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <PhoneIcon className="h-5 w-5 text-primary" />
-                <a href="#" className="text-muted-foreground hover:underline">
-                  +1 (234) 567-890
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPinIcon className="h-5 w-5 text-primary" />
-                <p className="text-muted-foreground">
-                  123 Main St, Anytown USA
-                </p>
               </div>
             </div>
             <div className="flex gap-4">
               <Link
-                href="#"
+                href="https://github.com/ddsuhaimi"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 prefetch={false}
               >
                 <GithubIcon className="h-6 w-6" />
               </Link>
               <Link
-                href="#"
+                href="https://x.com/ddsuhaimi_"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 prefetch={false}
               >
                 <TwitterIcon className="h-6 w-6" />
               </Link>
               <Link
-                href="#"
+                href="https://linkedin.com/in/dedi-suhaimi"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 prefetch={false}
               >
