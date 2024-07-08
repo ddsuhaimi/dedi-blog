@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ContactForm from "@/components/ContactForm";
 import { getDatabase } from "@/lib/notion";
+import profilePic from "../../public/avatartion.png";
 
 function FeatureArticle({ title, summary, slug, thumbnail = "" }) {
   return (
@@ -182,7 +183,7 @@ export default async function Home() {
           </div>
           <div className="relative overflow-hidden rounded-lg">
             <Image
-              src="/avatartion.png"
+              src={profilePic}
               width={300}
               height={150}
               alt="Profile"
