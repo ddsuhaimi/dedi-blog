@@ -105,7 +105,15 @@ export default async function BlogPage() {
           </p>
         </div>
         <div className="space-y-6">
-          <div className="flex flex-col gap-6">
+          <div className="flex items-center justify-center border border-dashed rounded-lg p-12">
+            <div className="text-center space-y-4">
+              <h3 className="text-2xl font-bold">No Articles Yet</h3>
+              <p className="text-muted-foreground">
+                I haven't published any articles yet, but check back soon!
+              </p>
+            </div>
+          </div>
+          {/* <div className="flex flex-col gap-6">
             {posts.map((post) => (
               <Card
                 key={post.properties.Title.title[0].plain_text}
@@ -149,7 +157,7 @@ export default async function BlogPage() {
                 </div>
               </Card>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
