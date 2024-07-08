@@ -137,13 +137,13 @@ export default async function ProjectPage(props: Props) {
                   ))}
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <h4 className="font-semibold">Project Goals:</h4>
                 <p>
                   The main goals of this project were to create a responsive and
                   visually appealing portfolio website that showcases my work.
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="flex gap-4">
               {githubLink && (
