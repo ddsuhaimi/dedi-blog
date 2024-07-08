@@ -64,7 +64,7 @@ const posts2 = [
     href: "/blogoptimizing-web-performance",
   },
   {
-    title: "Exploring the Power of TypeScript: A Beginner's Guide",
+    title: "Exploring the Power of TypeScript: A Beginner&apos;s Guide",
     description:
       "Discover the benefits of TypeScript and learn how to integrate it into your web development workflow.",
     date: "March 10, 2023",
@@ -109,7 +109,7 @@ export default async function BlogPage() {
             <div className="text-center space-y-4">
               <h3 className="text-2xl font-bold">No Articles Yet</h3>
               <p className="text-muted-foreground">
-                I haven't published any articles yet, but check back soon!
+                I haven&apos;t published any articles yet, but check back soon!
               </p>
             </div>
           </div>
