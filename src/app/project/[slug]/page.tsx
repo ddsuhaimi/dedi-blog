@@ -133,7 +133,7 @@ export default async function ProjectPage(props: Props) {
                 <h4 className="font-semibold">Technologies Used:</h4>
                 <div className="flex-1 space-x-2">
                   {technologies.map((item) => (
-                    <Badge>{item} </Badge>
+                    <Badge key={item}>{item} </Badge>
                   ))}
                 </div>
               </div>

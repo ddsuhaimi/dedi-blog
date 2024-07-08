@@ -148,12 +148,12 @@ export default async function Home() {
               Hey, I&apos;m Dedi. I build stuff on web.
             </h1>
             <p className="text-muted-foreground">
-              I'm a full-stack web developer based in Aceh, Indonesia.
+              I&apos;m a full-stack web developer based in Aceh, Indonesia.
             </p>
             <p className="text-muted-foreground">
-              I'm a passionate developer with a strong background in building
-              modern web applications. I love exploring new technologies and
-              constantly learning to improve my craft.
+              I&apos;m a passionate developer with a strong background in
+              building modern web applications. I love exploring new
+              technologies and constantly learning to improve my craft.
             </p>
             <p className="text-muted-foreground">
               Feel free to check out my blog or social media

@@ -107,7 +107,10 @@ export default async function BlogPage() {
         <div className="space-y-6">
           <div className="flex flex-col gap-6">
             {posts.map((post) => (
-              <Card className="overflow-hidden rounded-lg shadow-sm relative">
+              <Card
+                key={post.properties.Title.title[0].plain_text}
+                className="overflow-hidden rounded-lg shadow-sm relative"
+              >
                 <div className="flex flex-col md:flex-row items-start md:gap-4">
                   <img
                     src={`https://picsum.photos/id/${Math.floor(
