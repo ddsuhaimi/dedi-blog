@@ -182,7 +182,7 @@ export default async function Home() {
           </div>
           <div className="relative overflow-hidden rounded-lg">
             <Image
-              src="avatartion.png"
+              src="/avatartion.png"
               width={300}
               height={150}
               alt="Profile"
