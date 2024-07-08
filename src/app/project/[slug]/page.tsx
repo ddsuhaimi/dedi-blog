@@ -31,16 +31,16 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  if (!process.env.ARTICLE_DATABASE_ID) {
+  if (!process.env.PROJECT_DATABASE_ID) {
     throw new Error("DB Id is not defined");
   }
-  const posts = await getDatabase(process.env.ARTICLE_DATABASE_ID);
+  const posts = await getDatabase(process.env.PROJECT_DATABASE_ID);
   const post = posts.find(
-    (post: any) => true //post.properties.Slug.rich_text[0].plain_text === params.slug
+    (post: any) => post.properties.Slug.rich_text[0].plain_text === params.slug
   );
 
   return {
-    title: post.properties.Title.title[0].plain_text + " - Dedi",
+    title: post.properties.Name.title[0].plain_text + " - Dedi",
   };
 }
 
