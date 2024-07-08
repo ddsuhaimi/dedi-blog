@@ -50,6 +50,8 @@ function Article({ published_date, title, summary, slug }) {
 
 export default async function ProjectPage() {
   const projects2 = await getProjects();
+  // console.log(JSON.stringify(projects2, null, 2));
+
   // console.log("🚀 ~ ProjectPage ~ posts:", projects2);
   // const title = projects2[0].properties.Name.title[0].plain_text;
   // const slug = projects2[0].properties.Slug.rich_text[0].plain_text;
@@ -71,7 +73,9 @@ export default async function ProjectPage() {
             const title = project.properties.Name.title[0]?.plain_text;
             const slug =
               project.properties.Slug.rich_text[0]?.plain_text || "#";
-            const thumbnail = project.properties.Thumbnail.files[0]?.file.url;
+
+            const thumbnail =
+              project.properties.Thumbnail.files[0].external.url;
             const description =
               project.properties.Description.rich_text[0]?.plain_text;
             return (
@@ -82,10 +86,10 @@ export default async function ProjectPage() {
                 <div className="flex flex-col h-full cursor-pointer">
                   <img
                     src={thumbnail}
-                    width={400}
-                    height={225}
+                    // width={400}
+                    // height={225}
                     alt="Project Image"
-                    className="h-40 w-full object-cover object-center"
+                    className="h-40 w-full object-center object-cover"
                   />
                   <div className="flex flex-col justify-between flex-grow">
                     <div className="p-4 space-y-2">

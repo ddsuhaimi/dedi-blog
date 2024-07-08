@@ -243,7 +243,8 @@ export default async function Home() {
               const slug = project.properties.Slug.rich_text[0].plain_text;
               const description =
                 project.properties.Description.rich_text[0].plain_text;
-              const thumbnail = project.properties.Thumbnail.files[0].file.url;
+              const thumbnail =
+                project.properties.Thumbnail.files[0].external.url;
               return (
                 <FeatureProject
                   key={project.title}

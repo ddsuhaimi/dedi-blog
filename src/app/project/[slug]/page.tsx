@@ -19,6 +19,7 @@ import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import ZoomableImage from "@/components/ZoomableImage";
 
 type Props = {
   params: {
@@ -92,10 +93,11 @@ export default async function ProjectPage(props: Props) {
   prose-a:link`;
 
   const title = post.properties.Name.title[0].plain_text;
-  const thumbnail = post.properties.Thumbnail.files[0]?.file.url;
+  const thumbnail = post.properties.Thumbnail.files[0]?.external.url;
   const description = post.properties.Description.rich_text[0]?.plain_text;
+
   const screenshots = post.properties.Screenshot.files.map(
-    (item) => item.file.url
+    (item) => item.external.url
   );
   const githubLink = post.properties["Github Link"].url;
   const link = post.properties.Link.url;
@@ -107,7 +109,7 @@ export default async function ProjectPage(props: Props) {
       id="project-detail"
       className="container mx-auto max-w-5xl px-4 py-20 "
     >
-      <div className="space-y-8">
+      <div className="space-y-8 relative">
         <div className="space-y-4 pt-6">
           <h2 className="text-3xl font-bold">Project Details</h2>
           <p className="text-muted-foreground">
@@ -116,14 +118,7 @@ export default async function ProjectPage(props: Props) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <img
-              src={thumbnail}
-              width={600}
-              height={400}
-              alt="Project Image"
-              className="w-full rounded-lg object-cover object-center cursor-pointer transition-transform duration-300 hover:scale-105"
-              //   onClick={() => {}}
-            />
+            <ZoomableImage url={thumbnail} />
           </div>
           <div className="space-y-4 ">
             <h3 className="text-2xl font-bold">{title}</h3>
@@ -182,15 +177,7 @@ export default async function ProjectPage(props: Props) {
           <h3 className="text-2xl font-bold">Project Screenshots</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {screenshots.map((url) => (
-              <img
-                key={url}
-                src={url}
-                width={600}
-                height={400}
-                alt="Project Screenshot 1"
-                className="w-full rounded-lg object-cover object-center cursor-pointer transition-transform duration-300 hover:scale-105"
-                //   onClick={() => {}}
-              />
+              <ZoomableImage key={url} url={url} />
             ))}
           </div>
         </div>
