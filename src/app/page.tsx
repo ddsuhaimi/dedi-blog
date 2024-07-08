@@ -15,6 +15,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ContactForm from "@/components/ContactForm";
+import { getDatabase } from "@/lib/notion";
 
 function FeatureArticle({ title, summary, slug, thumbnail = "" }) {
   return (
@@ -138,7 +139,19 @@ function DownloadIcon(props) {
   );
 }
 
+async function getProjects() {
+  if (!process.env.PROJECT_DATABASE_ID) {
+    throw new Error("No article database id");
+  }
+  const posts = await getDatabase(process.env.PROJECT_DATABASE_ID);
+  const publishedProjects = posts.filter(
+    (project: any) => project.properties.Featured.checkbox
+  );
+  return publishedProjects;
+}
+
 export default async function Home() {
+  const projects = await getProjects();
   return (
     <>
       <section id="about" className="container mx-auto max-w-5xl px-4 py-20">
@@ -225,20 +238,22 @@ export default async function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureProject
-              title="JagoASN"
-              summary={
-                "A online test web portal with subscription and payment enabled"
-              }
-              slug={"/project/jagoasn"}
-              thumbnail="https://prod-files-secure.s3.us-west-2.amazonaws.com/acda97d1-4e8f-4902-9071-3ed496e7351d/80b9fe09-239d-4b47-a706-377f3a77c19f/JagoASN-Solusi-lulus-seleksi-CPNS-Kedinasan.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240708%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240708T015606Z&X-Amz-Expires=3600&X-Amz-Signature=0a75a5394e37f6182c8a87c821ef20b18c4c5bf7b2d6fc4d4fa7ba45dfcece71&X-Amz-SignedHeaders=host&x-id=GetObject"
-            />
-            <FeatureProject
-              title="Chrommandr"
-              summary={"A browser extension showing command palette"}
-              slug={"/project/chrommandr"}
-              thumbnail="https://prod-files-secure.s3.us-west-2.amazonaws.com/acda97d1-4e8f-4902-9071-3ed496e7351d/51895857-4a97-41ca-9cbe-ec6356295942/185647428-441b160f-c894-46da-bb58-73e713a569d2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240708%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240708T015637Z&X-Amz-Expires=3600&X-Amz-Signature=a483f7b15eb2e3f97c35a4a12bea11d08c3d53131071660e4394e88f9e9b5a75&X-Amz-SignedHeaders=host&x-id=GetObject"
-            />
+            {projects.map((project) => {
+              const title = project.properties.Name.title[0].plain_text;
+              const slug = project.properties.Slug.rich_text[0].plain_text;
+              const description =
+                project.properties.Description.rich_text[0].plain_text;
+              const thumbnail = project.properties.Thumbnail.files[0].file.url;
+              return (
+                <FeatureProject
+                  key={project.title}
+                  title={title}
+                  summary={description}
+                  slug={"/project/" + slug}
+                  thumbnail={thumbnail}
+                />
+              );
+            })}
           </div>
           <div>
             <Link href={"/project"} className="link">

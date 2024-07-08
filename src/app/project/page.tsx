@@ -22,7 +22,7 @@ async function getProjects() {
 export const revalidate = 10;
 export const metadata: Metadata = {
   title: "Blog - Dedi",
-  description: "Technical articles written by Dedi",
+  description: "Projects developed by Dedi",
 };
 function Article({ published_date, title, summary, slug }) {
   return (
@@ -47,51 +47,6 @@ function Article({ published_date, title, summary, slug }) {
     </div>
   );
 }
-
-const projects = [
-  {
-    title: "E-commerce Platform",
-    description:
-      "Full-stack e-commerce platform with user authentication, product listings, cart functionality, and checkout process.",
-    imageUrl: "/ecommerce.png",
-    link: "#",
-  },
-  {
-    title: "Task Management App",
-    description:
-      "Task management web application with CRUD operations for tasks, user authentication, and real-time updates.",
-    imageUrl: "/task-management.png",
-    link: "#",
-  },
-  {
-    title: "Social Media Dashboard",
-    description:
-      "Dashboard for analyzing social media metrics, scheduling posts, and managing user interactions.",
-    imageUrl: "/social-dashboard.png",
-    link: "#",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "Personal portfolio website showcasing projects, skills, and contact information.",
-    imageUrl: "/portfolio.png",
-    link: "#",
-  },
-  {
-    title: "Recipe App",
-    description:
-      "Recipe sharing platform with search functionality, user profiles, and favorites.",
-    imageUrl: "/recipe-app.png",
-    link: "#",
-  },
-  {
-    title: "Blog Platform",
-    description:
-      "Full-featured blog platform with rich text editor, comments section, and user roles.",
-    imageUrl: "/blog-platform.png",
-    link: "#",
-  },
-];
 
 export default async function ProjectPage() {
   const projects2 = await getProjects();
